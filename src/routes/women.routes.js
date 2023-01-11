@@ -3,7 +3,6 @@ import {
   getAllWomen,
   getWomenForId,
 } from "../controllers/women.controllers.js";
-import { pool } from "../db.js";
 
 const route = Router();
 
