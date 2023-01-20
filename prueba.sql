@@ -1,12 +1,14 @@
-create table product(
+create database product;
+
+create table women(
     id serial primary key ,
-    name varchar(255) not null,
-    description varchar(255) not null,
+    nameProduc varchar(255) not null,
+    descriptionProduct varchar(255) not null,
     price decimal(10,2) not null,
-    image varchar(255)
+    imag varchar(255)
 );
 
-insert into product(name, description, price) values('My Product', 'My description',211.1);
+insert into product(namePrueba, descriptionPrueba, price,imag) values('My Product', 'My description',211.1);
 select * from product
 
 /*comando para interuactuar con el contenedor de doker
@@ -15,3 +17,11 @@ select * from product
 -\c shor
 
 */
+
+sudo docker exec -it shor-prueba  bash
+mysql -u root -password
+use product
+show table
+
+describe women;
+
