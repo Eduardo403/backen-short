@@ -7,7 +7,7 @@ import {
 
 const route = Router();
 
-route.get("/women", getAllWomen);
-route.get("/women/:id", getWomenForId);
-route.post("/women", admiCreate);
+route.get("/shop/:category", getAllWomen);
+route.get("shop/women/:id", getWomenForId);
+route.post("/shop/admi", admiCreate);
 export default route;

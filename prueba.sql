@@ -1,11 +1,12 @@
 create database product;
 
-create table women(
+create table allProduct(
     id serial primary key ,
     nameProduc varchar(255) not null,
     descriptionProduct varchar(255) not null,
     price decimal(10,2) not null,
-    imag varchar(255)
+    imag varchar(255),
+    category varchar(7) not null
 );
 
 insert into product(namePrueba, descriptionPrueba, price,imag) values('My Product', 'My description',211.1);

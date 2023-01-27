@@ -1,13 +1,19 @@
 import { pool } from "../db.js";
-
+/**this is the controller wiht get all product for category men */
 export const getAllMen = async (req, res) => {
+  const { category } = req.params;
   try {
-    let menRes = await pool.query("select * from  men");
-    res.status(200).json(menRes.rows);
+    let menRes = await pool.query(
+      "select * from  allProduct where category = ?",
+      [category]
+    );
+
+    res.status(200).json(menRes[0]);
   } catch (error) {
     res.status(500).json(error);
   }
 };
+/**get only a product for id this is for watch details for this product */
 export const getMenForId = async (req, res) => {
   const { id } = req.params;
   try {
