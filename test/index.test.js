@@ -34,14 +34,16 @@ describe("post/product", () => {
   };
   //should respond with a content-type of application/json
   test("should respond with a contet-type of application/json", async () => {
-    const response = await request(app).post("shop/admi").send();
+    const response = await request(app).post("/shop/women/create").send();
     expect(response.statusCode).toBe(200);
     // expect(response.headers["Content-Type"]).toBe("application/json");
   });
 
   //validate product not null
   test("should validate product not null", async () => {
-    const response = await request(app).post("shop/admi").send(missingProduct);
+    const response = await request(app)
+      .post("/shop/women/create")
+      .send(missingProduct);
     expect(response.statusCode).toBe(400);
     // expect(response.body).toBe("missing something data in the form");
   });

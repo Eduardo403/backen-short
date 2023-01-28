@@ -1,23 +1,21 @@
 import { pool } from "../db.js";
 
-export const admiCreate = async (req, res) => {
-  const { name, description, price } = req.body;
+/**create a new product only admi an moderator can create a new product this is protect route*/
+export const newProduct = async (req, res) => {
+  const { name, description, price, image, category } = req.body;
+  console.log(category);
   try {
-    const [rows] = await pool.query(
-      "insert into women (name,description, price )  value (?,?,?)",
-      [name, description, price]
+    if (!name || !description || !price || !image || !category)
+      throw new Error("missing something data in the form");
+    const response = await pool.query(
+      "INSERT INTO allProduct (nameProduc, descriptionProduct, price, imag ,category)  VALUES(?, ?, ?, ?,?)",
+      [name, description, price, image, category]
     );
-    res.header("Access-Control-Allow-Origin", "*");
+    if (!response.affectedRows === 1)
+      throw new Error("conection whit  dataBase failed");
 
-    res.send({
-      id: rows.insertId,
-      name,
-      description,
-      price,
-    });
+    res.status(200).json({ message: "insert data successfully" });
   } catch (error) {
-    return res.status(500).json({
-      error,
-    });
+    return res.status(400).json(error.message || error);
   }
 };

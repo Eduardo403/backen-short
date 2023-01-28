@@ -1,10 +1,7 @@
 import express from "express";
 import cors from "cors";
-import shortRoute from "./routes/shor.routes.js";
-import menRoute from "./routes/men.routes.js";
-import womenRoute from "./routes/women.routes.js";
+import getProductRoute from "./routes/getProduct.routes.js";
 import adminRoute from "./routes/admin.routes.js";
-
 import morgan from "morgan";
 
 const app = express();
@@ -16,7 +13,6 @@ app.use(morgan("dev"));
 
 //routes
 
-app.use(shortRoute);
-app.use(womenRoute);
-app.use(menRoute);
+app.use(getProductRoute);
+app.use(adminRoute);
 export default app;

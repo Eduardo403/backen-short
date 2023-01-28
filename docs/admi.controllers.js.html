@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: admi.controllers.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,39 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: admi.controllers.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { pool } from "../db.js";
 
+/**create a new product only admi an moderator can create a new product this is protect route*/
+export const newProduct = async (req, res) => {
+  const { name, description, price, image, category } = req.body;
+  console.log(category);
+  try {
+    if (!name || !description || !price || !image || !category)
+      throw new Error("missing something data in the form");
+    const response = await pool.query(
+      "INSERT INTO allProduct (nameProduc, descriptionProduct, price, imag ,category)  VALUES(?, ?, ?, ?,?)",
+      [name, description, price, image, category]
+    );
+    if (!response.affectedRows === 1)
+      throw new Error("conection whit  dataBase failed");
 
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+    res.status(200).json({ message: "insert data successfully" });
+  } catch (error) {
+    return res.status(400).json(error.message || error);
+  }
+};
+</code></pre>
+        </article>
+    </section>
 
 
 
