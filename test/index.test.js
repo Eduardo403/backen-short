@@ -55,8 +55,10 @@ describe("post/product/admi", () => {
     const response = await request(app)
       .post("/admi/newProduct")
       .send(missingProduct);
-    expect(response.statusCode).toBe(400);
-    expect(response.body).toBe("missing something data in the form");
+    expect(response.statusCode).toBe(404);
+    expect(response.body.message).toBe(
+      "something fields  is missing data ,please review"
+    );
   });
 });
 
@@ -97,13 +99,15 @@ describe("patch route", () => {
       "application/json; charset=utf-8"
     );
   });
-  //should respond with s status code 400
+  //should respond with s status code 404
   test("should validate product not null", async () => {
     const response = await request(app)
       .patch("/admi/updateProduct/2")
       .send(missingProduct);
-    expect(response.statusCode).toBe(400);
-    expect(response.body).toBe("missing something data in the form");
+    expect(response.statusCode).toBe(404);
+    expect(response.body.message).toBe(
+      "something fields  is missing data ,please review"
+    );
   });
   //should respond with a object
   test("should respond with a object", async () => {
