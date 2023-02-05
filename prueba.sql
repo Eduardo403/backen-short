@@ -9,6 +9,14 @@ create table allProduct(
     category varchar(7) not null
 );
 
+create table users(
+    id serial primary key ,
+    username varchar(55) not null,
+    email varchar(150) not null unique,
+    password varchar(255) not null,
+    role varchar(255) default 'users'
+);
+
 insert into product(namePrueba, descriptionPrueba, price,imag) values('My Product', 'My description',211.1);
 select * from product
 
