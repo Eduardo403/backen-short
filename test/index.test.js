@@ -117,3 +117,46 @@ describe("patch route", () => {
     expect(response.body).toEqual(expect.arrayContaining([]));
   });
 });
+
+describe("login and logout with jwt authentication", () => {
+  const user = {
+    email: "email6@email.com",
+    password: "prueba123",
+  };
+
+  const missingUser = {
+    username: "pablo",
+    password: "prueba123",
+    email: "",
+    role: "user",
+  };
+
+  //should respond with a statusCode 400 missing data
+  test("should respond wiht a statusCode 400", async () => {
+    const response = await request(app).post("/newUser").send(missingUser);
+    expect(response.status).toBe(400);
+    expect(response.body.message).toBe("Required fields are missing");
+  });
+  //login users with jwt authentication
+  test("should respond statusCode 200", async () => {
+    const respose = await request(app).get("/login").send(user);
+    expect(respose.statusCode).toBe(200);
+    expect(respose.body.message).toBe("welcoment !");
+  });
+  //should respond with a statusCode 400 user don not exist
+  test("should respond statusCode 400 user dont not exist", async () => {
+    const respose = await request(app)
+      .get("/login")
+      .send({ email: "email622@email.com", password: "prueba123" });
+    expect(respose.statusCode).toBe(400);
+    expect(respose.body.message).toBe("User does not exist");
+  });
+  //should respond with a statusCode 400 Wrong password
+  test("should respond statusCode 400 Wrong password", async () => {
+    const respose = await request(app)
+      .get("/login")
+      .send({ email: "email6@email.com", password: "prueba1" });
+    expect(respose.statusCode).toBe(400);
+    expect(respose.body.message).toBe("Wrong password");
+  });
+});
