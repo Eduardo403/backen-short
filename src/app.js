@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import getProductRoute from "./routes/getProduct.routes.js";
+import getProductRoute from "./routes/product.routes.js";
 import adminRoute from "./routes/admin.routes.js";
 import userRouter from "./routes/user.routes.js";
 import morgan from "morgan";
